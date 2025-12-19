@@ -111,6 +111,10 @@ function App() {
       return "Please Ayushi, I really am sorry. I know I hurt you, but I want to make things right. You mean so much to me.";
     } else if (noClickCount === 2) {
       return "I know sorry isn't enough. I promise to do better and show you through my actions. Your friendship is precious to me.";
+    } else if (noClickCount === 3) {
+      return "Ayushi, I've been thinking about how much you mean to me. I can't imagine not having you in my life. Please forgive me!";
+    } else if (noClickCount === 4) {
+      return "I promise I'll make it up to you! I'll be the best friend you could ever ask for. Just give me one more chance!";
     } else {
       return "Come on Ayushi, you know you want to click Yes! I'll keep trying until you forgive me! 🥺";
     }
@@ -120,24 +124,88 @@ function App() {
     if (noClickCount === 0) return null;
     if (noClickCount === 1) return "😢";
     if (noClickCount === 2) return "💔";
-    return "🥺";
+    if (noClickCount === 3) return "🥺";
+    if (noClickCount === 4) return "😭";
+    return "🙏";
   };
 
   const getQuestion = () => {
     if (noClickCount === 0) return "Will you forgive me?";
     if (noClickCount === 1) return "Can we try again?";
     if (noClickCount === 2) return "One more chance?";
-    return "Please? Pretty please with a cherry on top?";
+    if (noClickCount === 3) return "Please forgive me?";
+    if (noClickCount === 4) return "I'm begging you!";
+    return "Pretty please with a cherry on top?";
   };
 
   const getButtonText = () => {
     return {
-      yes: noClickCount === 0 ? "Yes" : noClickCount === 1 ? "Yes, I forgive you" : "Okay, fine",
-      no: noClickCount === 0 ? "No" : noClickCount === 1 ? "Still no" : "Nope"
+      yes: noClickCount === 0 ? "Yes" :
+           noClickCount === 1 ? "Yes, I forgive you" :
+           noClickCount === 2 ? "Okay, fine" :
+           noClickCount === 3 ? "Alright then" :
+           "Yes, yes!",
+      no: noClickCount === 0 ? "No" :
+          noClickCount === 1 ? "Still no" :
+          noClickCount === 2 ? "Nope" :
+          noClickCount === 3 ? "Not yet" :
+          "Never"
     };
   };
 
+  // Different success pages based on noClickCount
+  const getSuccessPage = () => {
+    if (noClickCount === 0) {
+      // First time - she said yes immediately
+      return {
+        icon: "🎉",
+        title: "Wow! Thank You!",
+        message: "You forgave me right away! You're the most amazing person ever. I don't deserve you, but I promise to do better! ❤️",
+        emojis: ["😊", "💖", "🌟"],
+        note: "You have the kindest heart, Ayushi"
+      };
+    } else if (noClickCount === 1) {
+      // Said no once
+      return {
+        icon: "🥹",
+        title: "Thank You So Much!",
+        message: "I knew you had a big heart! Thank you for giving me another chance. I promise I won't let you down again!",
+        emojis: ["🙏", "💝", "✨"],
+        note: "Your forgiveness means the world to me"
+      };
+    } else if (noClickCount === 2) {
+      // Said no twice
+      return {
+        icon: "😭",
+        title: "Finally! Thank You!",
+        message: "I was getting worried there! But I'm so happy you forgave me. I'll spend every day proving I deserve your friendship!",
+        emojis: ["🎊", "💕", "🌈"],
+        note: "I'll make it up to you, I promise!"
+      };
+    } else if (noClickCount === 3) {
+      // Said no three times
+      return {
+        icon: "🎊",
+        title: "YES! Thank You!",
+        message: "You made me work for it, but it was worth it! Thank you so much for forgiving me. You're truly special, Ayushi!",
+        emojis: ["🙌", "💗", "⭐"],
+        note: "Your friendship is worth fighting for"
+      };
+    } else if (noClickCount >= 4) {
+      // Said no 4+ times
+      return {
+        icon: "🎆",
+        title: "FINALLY! You Did It!",
+        message: "I almost gave up hope! But here we are! Thank you for testing my patience and eventually forgiving me. You're one in a million, Ayushi! 💫",
+        emojis: ["🎉", "💖", "🏆"],
+        note: "Persistence paid off! Thank you for forgiving me!"
+      };
+    }
+  };
+
   if (forgiven) {
+    const successContent = getSuccessPage();
+
     return (
       <div className="App">
         <div className="gradient-bg"></div>
@@ -150,20 +218,19 @@ function App() {
           <div className="shape shape-4"></div>
         </div>
         <div className="container success-message">
-          <div className="success-icon">🎉</div>
-          <h1 className="success-title">Thank You!</h1>
+          <div className="success-icon">{successContent.icon}</div>
+          <h1 className="success-title">{successContent.title}</h1>
           <div className="name">Ayushi</div>
           <div className="message success-text">
-            You have no idea how happy this makes me! I promise to be better.
-            Thank you for giving me another chance!
+            {successContent.message}
           </div>
           <div className="success-emojis">
-            <span className="emoji-float">😊</span>
-            <span className="emoji-float">💖</span>
-            <span className="emoji-float">🌟</span>
+            <span className="emoji-float">{successContent.emojis[0]}</span>
+            <span className="emoji-float">{successContent.emojis[1]}</span>
+            <span className="emoji-float">{successContent.emojis[2]}</span>
           </div>
           <div className="thank-you-note">
-            Your forgiveness means everything to me
+            {successContent.note}
           </div>
         </div>
       </div>
@@ -191,7 +258,11 @@ function App() {
       <div className="container">
         {getEmoji() && <div className="sad-emoji">{getEmoji()}</div>}
         <h1 className="main-title">
-          {noClickCount === 0 ? "I'm Sorry" : noClickCount === 1 ? "Oh no..." : "I understand..."}
+          {noClickCount === 0 ? "I'm Sorry" :
+           noClickCount === 1 ? "Oh no..." :
+           noClickCount === 2 ? "I understand..." :
+           noClickCount === 3 ? "Please wait..." :
+           "Don't give up on me..."}
         </h1>
         <div className="name-container">
           <div className="name">Ayushi</div>
