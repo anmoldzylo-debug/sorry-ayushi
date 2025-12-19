@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/sorry-ayushi/static/css/main.00e83220.css",
+    "main.js": "/sorry-ayushi/static/js/main.2813c019.js",
+    "static/js/453.ebccf97f.chunk.js": "/sorry-ayushi/static/js/453.ebccf97f.chunk.js",
+    "index.html": "/sorry-ayushi/index.html",
+    "main.00e83220.css.map": "/sorry-ayushi/static/css/main.00e83220.css.map",
+    "main.2813c019.js.map": "/sorry-ayushi/static/js/main.2813c019.js.map",
+    "453.ebccf97f.chunk.js.map": "/sorry-ayushi/static/js/453.ebccf97f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.00e83220.css",
+    "static/js/main.2813c019.js"
+  ]
+}
